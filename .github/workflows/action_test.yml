@@ -2,7 +2,7 @@ name: every 5 minutes
 
 on:
   schedule:
-    - cron: "10 5 * * *"   # 매일 14:10 (KST)
+    - cron: "37 5 * * *"   # 매일 14:10 (KST)
   workflow_dispatch:
 
 jobs:
