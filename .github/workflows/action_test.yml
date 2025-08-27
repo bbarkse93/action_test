@@ -2,15 +2,26 @@ name: every 5 minutes
 
 on:
   schedule:
-    - cron: "37 5 * * *"   # 매일 14:10 (KST)
+    - cron: "47 5 * * *"   # 매일 14:37 (KST)
   workflow_dispatch:
 
 jobs:
   call-api:
     runs-on: ubuntu-latest
+    # 스케줄은 항상 통과, 수동은 'bbarkse93'만 허용
+    if: ${{ github.event_name != 'workflow_dispatch' || github.actor == 'bbarkse93' }}
     steps:
       - name: Call ASP endpoint (no token)
         run: |
           curl -X POST https://hohoschool.com/hohoeduapi/user_login_202508.html \
             -H "Content-Type: application/json" \
             -d '{"job":"every-5m"}'
+
+  # (선택) 다른 사용자가 수동 실행하면 즉시 실패로 표시
+  block-unauthorized-manual:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' && github.actor != 'bbarkse93' }}
+    steps:
+      - run: |
+          echo "Only bbarkse93 can run this workflow manually."
+          exit 1
