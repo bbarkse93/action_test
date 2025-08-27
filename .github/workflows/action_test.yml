@@ -1,8 +1,8 @@
-name: every 10 minutes
+name: every 5 minutes
 
 on:
   schedule:
-    - cron: '*/1 * * * *'   # 매 1분 (UTC 기준)
+    - cron: '*/5 * * * *'   # 매 1분 (UTC 기준)
   workflow_dispatch:          # 수동 실행 버튼
 
 jobs:
@@ -13,4 +13,4 @@ jobs:
         run: |
           curl -X POST https://hohoschool.com/hohoeduapi/user_login_202508.html \
             -H "Content-Type: application/json" \
-            -d '{"job":"every-10m"}'
+            -d '{"job":"every-5m"}'
