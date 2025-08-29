@@ -2,7 +2,7 @@ name: every 17 minutes
 
 on:
   schedule:
-    - cron: "*/17 * * * *"   # 매 17분마다 실행 (UTC 기준)
+    - cron: "17 1 * * *"   
   workflow_dispatch:
 
 jobs:
